@@ -1,0 +1,6 @@
+[submodule "gpt-2"]
+	path = gpt-2
+	url = https://github.com/openai/gpt-2.git
+[submodule "stable-diffusion"]
+	path = stable-diffusion
+	url = https://github.com/CompVis/stable-diffusion.git
