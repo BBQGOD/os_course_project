@@ -1,0 +1,11 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  gpt2:
+    lang: python3-http-debian-gpt2
+    handler: ./gpt2
+    image: bbqgod/gpt2:latest
+    # image: huggingface/transformers-pytorch-gpu:latest
+

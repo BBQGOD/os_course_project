@@ -4,3 +4,6 @@
 [submodule "stable-diffusion"]
 	path = stable-diffusion
 	url = https://github.com/CompVis/stable-diffusion.git
+[submodule "Tetris"]
+	path = Tetris
+	url = https://github.com/JelixLi/Tetris.git
