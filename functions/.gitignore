@@ -1,5 +1,7 @@
-template
+template/*
 build
 .secrets
 
 hf_*
+
+!template/python3-http-debian-gpt2
