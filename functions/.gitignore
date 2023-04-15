@@ -1,7 +1,9 @@
 template/*
 build
 .secrets
+SDv1-4
 
 hf_*
 
 !template/python3-http-debian-gpt2
+!template/python3-http-debian-sd
