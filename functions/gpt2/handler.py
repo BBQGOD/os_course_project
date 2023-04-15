@@ -1,3 +1,4 @@
+import json
 from transformers import BertTokenizer, GPT2LMHeadModel, TextGenerationPipeline
 
 def prep(model_path):
@@ -11,12 +12,30 @@ def handle(event, context):
     text_generator = prep("function/hf_gpt2")
 
     if event.method == "GET":
-        gen_res = text_generator(
-            event.body.decode(),
-            max_length=100,
-            do_sample=True,
-            temperature=0.7,
-        )[0]["generated_text"]
+        try:
+            json_data = json.loads(event.body)
+            batch_size = json_data["batch_size"]
+            prompt_list = json_data["prompt_list"]
+
+            res = text_generator(
+                prompt_list,
+                max_length=100,
+                do_sample=True,
+                temperature=0.7,
+                batch_size=batch_size,
+            )
+            
+            gen_res = []
+            for i in range(len(res)):
+                gen_res.append(res[i][0]["generated_text"])
+
+        except:
+            gen_res = text_generator(
+                event.body.decode(),
+                max_length=100,
+                do_sample=True,
+                temperature=0.7,
+            )[0]["generated_text"]
     else:
         gen_res = "Only support GET method."
 
