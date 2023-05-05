@@ -31,7 +31,7 @@ def format_body(res, content_type):
 
     if 'body' not in res:
         return ""
-    elif type(res['body']) == dict:
+    elif type(res['body']) == dict or type(res['body']) == list:
         return jsonify(res['body'])
     else:
         return str(res['body'])

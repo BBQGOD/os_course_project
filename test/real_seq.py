@@ -1,7 +1,7 @@
 import time
 import urllib3
 
-TGT_URL = "http://localhost:8080/function/gpt2batch"
+TGT_URL = "http://localhost:8080/function/gpt2"
 
 http = urllib3.PoolManager()
 
