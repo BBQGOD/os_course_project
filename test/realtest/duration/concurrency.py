@@ -4,6 +4,7 @@ import time
 
 TGT_URL = "http://localhost:8080/function/gpt2batch"
 QUERIES = "realdata/sample.txt"
+TIME_INTERVAL = 0.2
 
 http = urllib3.PoolManager()
 
@@ -26,7 +27,8 @@ if __name__ == "__main__":
     timer = time.perf_counter()
     with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
         for i, q in enumerate(queries):
-            executor.submit(test, q, i, timer)
+            executor.submit(test, q, i, time.perf_counter())
+            time.sleep(TIME_INTERVAL)
     timer = time.perf_counter() - timer
 
     print(f"Average time: {timer / len(queries)}s")

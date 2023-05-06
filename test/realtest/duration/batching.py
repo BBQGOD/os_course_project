@@ -5,12 +5,7 @@ import psutil
 
 QUERIES = "realdata/sample.txt"
 BATCH_SIZE = 4
-
-def get_memory_usage(process_name):
-    for proc in psutil.process_iter(['name']):
-        if proc.info['name'] == process_name:
-            return proc.memory_info().rss
-    return None
+TIME_INTERVAL = 0.2
 
 with open(QUERIES, "r") as f:
     queries = f.readlines()
@@ -28,7 +23,11 @@ for i in range(0, len(queries), BATCH_SIZE):
     body = json.dumps(body)
     headers = {"Content-Type": "application/json"}
     r = http.request("GET", url, body=body, headers=headers)
-    delays += [time.perf_counter() - timer for _ in range(len(batch))]
+    delay = time.perf_counter() - timer
+    delays += [delay - TIME_INTERVAL * j for j in range(i, i + len(batch))]
+    nex_batch_size = BATCH_SIZE if i + BATCH_SIZE < len(queries) else len(queries) - i
+    if i < len(queries) - 1 and delay < TIME_INTERVAL * (i + nex_batch_size):
+        time.sleep(TIME_INTERVAL * (i + nex_batch_size) - delay)
     res += json.loads(r.data.decode())
 
 timer = time.perf_counter() - timer
