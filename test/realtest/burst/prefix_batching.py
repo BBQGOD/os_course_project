@@ -66,7 +66,15 @@ class Trie:
         node.is_end = False
         node.word = None
         return True
-
+    
+def longest_common_prefix(words):
+    if not words:
+        return ""
+    for i, char in enumerate(words[0]):
+        for word in words[1:]:
+            if i >= len(word) or word[i] != char:
+                return words[0][:i]
+    return words[0]
 
 with open(QUERIES, "r") as f:
     queries = f.readlines()
@@ -80,7 +88,9 @@ timer = time.perf_counter()
 res = []
 for i in range(0, len(queries), BATCH_SIZE):
     batch = queries[i:i+BATCH_SIZE if i+BATCH_SIZE < len(queries) else len(queries)]
-    body = {"batch_size": len(batch), "prompt_list": batch}
+    prefix = longest_common_prefix(batch)
+    batch = [q[len(prefix):] for q in batch]
+    body = {"batch_size": len(batch), "prompt_list": batch, "prefix": prefix}
     body = json.dumps(body)
     headers = {"Content-Type": "application/json"}
     r = http.request("GET", url, body=body, headers=headers)
