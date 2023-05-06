@@ -79,9 +79,10 @@ def longest_common_prefix(words):
 with open(QUERIES, "r") as f:
     queries = f.readlines()
 queries = [q.strip() for q in queries]
+queries = sorted(queries)
 
 http = urllib3.PoolManager()
-url = "http://localhost:8080/function/gpt2batch"
+url = "http://localhost:8080/function/gpt2prefixbatch"
 delays = []
 
 timer = time.perf_counter()
@@ -89,13 +90,19 @@ res = []
 for i in range(0, len(queries), BATCH_SIZE):
     batch = queries[i:i+BATCH_SIZE if i+BATCH_SIZE < len(queries) else len(queries)]
     prefix = longest_common_prefix(batch)
+    if len(prefix) >= min(len(q) for q in batch) - 1:
+        prefix = prefix[:-2]
     batch = [q[len(prefix):] for q in batch]
     body = {"batch_size": len(batch), "prompt_list": batch, "prefix": prefix}
+    # print(body)
     body = json.dumps(body)
     headers = {"Content-Type": "application/json"}
     r = http.request("GET", url, body=body, headers=headers)
     delays += [time.perf_counter() - timer for _ in range(len(batch))]
-    res += json.loads(r.data.decode())
+    tmpres = json.loads(r.data.decode())
+    tmpres = [prefix + res for res in tmpres]
+    # print(tmpres)
+    res += tmpres
 
 timer = time.perf_counter() - timer
 print(res)
