@@ -82,7 +82,7 @@ queries = [q.strip() for q in queries]
 queries = sorted(queries)
 
 http = urllib3.PoolManager()
-url = "http://localhost:8080/function/gpt2prefixbatch"
+url = "http://localhost:8080/function/gpt2prefixbatchcached"
 delays = []
 
 timer = time.perf_counter()
@@ -99,6 +99,7 @@ for i in range(0, len(queries), BATCH_SIZE):
     headers = {"Content-Type": "application/json"}
     r = http.request("GET", url, body=body, headers=headers)
     delays += [time.perf_counter() - timer for _ in range(len(batch))]
+    print(r.data)
     tmpres = json.loads(r.data.decode())
     tmpres = [prefix + res for res in tmpres]
     # print(tmpres)
