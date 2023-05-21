@@ -92,14 +92,24 @@ for i in range(0, len(queries), BATCH_SIZE):
     prefix = longest_common_prefix(batch)
     if len(prefix) >= min(len(q) for q in batch) - 1:
         prefix = prefix[:-2]
+    if len(prefix) < 10:
+        prefix = ''
     batch = [q[len(prefix):] for q in batch]
-    body = {"batch_size": len(batch), "prompt_list": batch, "prefix": prefix}
+    # if len(prefix) > 0:
+    #     prefix = ' '.join([prefix for _ in range(4)])
+    #     batch = [prefix + q for q in batch]
+    # if len(prefix) > 0:
+        # prefix = ' '.join([prefix for _ in range(5)])
+    # prefix = ''
+
+    body = {"batch_size": len(batch), "prompt_list": batch, "prefix": prefix, "max_length": 200}
+    print(prefix)
     # print(body)
     body = json.dumps(body)
     headers = {"Content-Type": "application/json"}
     r = http.request("GET", url, body=body, headers=headers)
     delays += [time.perf_counter() - timer for _ in range(len(batch))]
-    print(r.data)
+    # print(r.data)
     tmpres = json.loads(r.data.decode())
     tmpres = [prefix + res for res in tmpres]
     # print(tmpres)

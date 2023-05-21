@@ -1,17 +1,15 @@
-def hello_world():
-    print("Hello World!")
+def encode():
+    i = 0
+    for w in worte:
+        print(i, ': ', w)
+        i += 1
+    
+    print('\n')
 
-# Hello World in Python!
-hello_world()
+def decode():
+    i = 0
+    for w in worte:
+        print(i, ': ', w)
+        i += 1
 
-# Add a print statement to the function.
-def div(a, b):
-    return a // b
-
-# Call div().
-print(div(4, 5))
-
-# Convert the result to an integer.
-print("4 is " + str(div(4, 5)))
-
-# Convert the result to a string
+if __name__ == "__

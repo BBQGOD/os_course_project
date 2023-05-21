@@ -6,7 +6,7 @@ functions:
   gpt2prefixbatchcached:
     lang: python3-http-debian-gpt2-cache
     handler: ./gpt2prefixbatch_cached
-    image: bbqgod/gpt2_prefixbatchc_ached:latest
+    image: bbqgod/gpt2prefix_batch_cached_renew:latest
     # image: huggingface/transformers-pytorch-gpu:latest
     imagePullPolicy: Always
     build_args:
