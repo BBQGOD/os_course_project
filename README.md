@@ -42,7 +42,7 @@ graph TD;
 
 ### 3.1. Quick Start
 
-> Please refer to Wiki in this repo for pre-requisites and server setup.
+> Please refer to [Wiki](https://github.com/BBQGOD/os_course_project/wiki) in this repo for pre-requisites and server setup. 
 
 - To require text generation service, run:
 
@@ -58,7 +58,7 @@ graph TD;
 
 ### 3.2. Replication
 
-> Please refer to Wiki in this repo.
+> Please refer to [Wiki](https://github.com/BBQGOD/os_course_project/wiki) in this repo.
 
 ## 4. Reference
 
