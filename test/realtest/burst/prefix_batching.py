@@ -102,7 +102,7 @@ for i in range(0, len(queries), BATCH_SIZE):
         # prefix = ' '.join([prefix for _ in range(5)])
     # prefix = ''
 
-    body = {"batch_size": len(batch), "prompt_list": batch, "prefix": prefix, "max_length": 200}
+    body = {"batch_size": len(batch), "prompt_list": batch, "prefix": prefix, "max_length": 100}
     print(prefix)
     # print(body)
     body = json.dumps(body)

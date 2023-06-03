@@ -37,7 +37,7 @@ def handle(event, context):
                 input_ids,
                 attention_mask=all_attention_mask,
                 past_key_values=past_key_values,
-                max_length=100,
+                max_length=100 - len(prefix) - input_ids.shape[1] + 1,
                 do_sample=True,
                 temperature=0.7,
             )

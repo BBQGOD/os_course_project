@@ -3,9 +3,11 @@ provider:
   name: openfaas
   gateway: http://127.0.0.1:8080
 functions:
-  codegen:
-    lang: python3-http-debian-gpt2
-    handler: ./codegen
-    image: bbqgod/codegen2:latest
+  codegencached:
+    lang: python3-http-debian-gpt2-cache
+    handler: ./codegencached
+    image: bbqgod/codegencached:latest
     # image: huggingface/transformers-pytorch-gpu:latest
     imagePullPolicy: Always
+    build_args:
+      p: "5000:5000"
