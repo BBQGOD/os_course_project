@@ -10,6 +10,7 @@ def prep(model_path):
     redis_client = redis.Redis(host='172.17.0.1', port=REDIS_PORT, db=0)
     
     tokenizer = AutoTokenizer.from_pretrained(model_path)
+    tokenizer.pad_token = tokenizer.eos_token
     model = AutoModelForCausalLM.from_pretrained(model_path)
     text_generator = TextGenerationPipeline(model, tokenizer)
     return text_generator, tokenizer, model, redis_client
@@ -65,7 +66,7 @@ def handle(event, context):
                 input_ids[:, -1:],
                 attention_mask=all_attention_mask,
                 past_key_values=past_key_values,
-                max_length=100,
+                max_length=20,
                 do_sample=True,
                 temperature=0.7,
             )
@@ -80,7 +81,7 @@ def handle(event, context):
                 input_ids[:, -1:],
                 attention_mask=attention_mask,
                 past_key_values=past_key_values,
-                max_length=100,
+                max_length=20,
                 do_sample=True,
                 temperature=0.7,
             )

@@ -37,9 +37,10 @@ def send_concurrency():
         ans_list[pid] = r.data.decode()
     query = request.args.get('query')
     timer = time.perf_counter()
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as executor:
-        for i in range(CANDIDATES_NUM):
-            executor.submit(test, query, i, timer)
+    with concurrent.futures.ThreadPoolExecutor(max_workers=CANDIDATES_NUM) as executor:
+        futures = [executor.submit(test, query, i) for i in range(CANDIDATES_NUM)]
+        concurrent.futures.wait(futures)
+
     timer = time.perf_counter() - timer
 
     return json.dumps({"ans_list": ans_list, "time": timer}, ensure_ascii=False)

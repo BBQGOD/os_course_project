@@ -6,6 +6,6 @@ functions:
   codegen:
     lang: python3-http-debian-gpt2
     handler: ./codegen
-    image: bbqgod/codegen2:latest
+    image: bbqgod/codegenupdate:latest
     # image: huggingface/transformers-pytorch-gpu:latest
-    imagePullPolicy: Always
+    # imagePullPolicy: Always

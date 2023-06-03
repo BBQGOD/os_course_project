@@ -19,7 +19,7 @@ def handle(event, context):
 
             res = text_generator(
                 prompt_list,
-                max_length=len(prompt_list[0]) + 100,
+                max_length=len(prompt_list[0]) + 20,
                 do_sample=True,
                 temperature=0.7,
                 batch_size=batch_size,
@@ -32,7 +32,7 @@ def handle(event, context):
         except:
             gen_res = text_generator(
                 event.body.decode(),
-                max_length=len(event.body.decode()) + 100,
+                max_length=len(event.body.decode()) + 20,
                 do_sample=True,
                 temperature=0.7,
             )[0]["generated_text"]

@@ -23,11 +23,10 @@ while True:
     r = http.request("GET", url, body=body.encode(), headers=headers)
     res_list = json.loads(r.data.decode())
     res = res_list[0]
-    print("Output: \n" + history + ("" if sys.argv[1] == "uncached" else last_history)
-          + src + res)
+    print("Output: \n" + (res if sys.argv[1] == "uncached" else history + last_history + res))
 
     if sys.argv[1] == "uncached":
-        history += src + res
+        history = res
     else:
         history += last_history
-        last_history = src + res
+        last_history = res
