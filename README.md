@@ -56,6 +56,12 @@ graph TD;
     python test/demo_sd.py
     ```
 
+- To require code generation service, run:
+
+    ```bash
+    python test/demo_codegen.py
+    ```
+
 ### 3.2. Replication
 
 > Please refer to [Wiki](https://github.com/BBQGOD/os_course_project/wiki) in this repo.
