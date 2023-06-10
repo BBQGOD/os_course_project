@@ -1,0 +1,13 @@
+version: 1.0
+provider:
+  name: openfaas
+  gateway: http://127.0.0.1:8080
+functions:
+  codegencached:
+    lang: python3-http-debian-gpt2-cache
+    handler: ./codegencached
+    image: bbqgod/codegencached3:latest
+    # image: huggingface/transformers-pytorch-gpu:latest
+    # imagePullPolicy: Always
+    build_args:
+      p: "5000:5000"

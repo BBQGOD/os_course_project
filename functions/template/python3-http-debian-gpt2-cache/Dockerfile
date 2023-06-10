@@ -18,6 +18,7 @@ RUN chown app /home/app
 USER app
 
 ENV PATH=$PATH:/home/app/.local/bin
+ENV HOST=host.docker.internal
 
 WORKDIR /home/app/
 
