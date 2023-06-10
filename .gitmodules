@@ -7,3 +7,6 @@
 [submodule "Tetris"]
 	path = Tetris
 	url = https://github.com/JelixLi/Tetris.git
+[submodule "CrossWOZ"]
+	path = CrossWOZ
+	url = https://github.com/thu-coai/CrossWOZ.git
